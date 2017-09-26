@@ -4,7 +4,7 @@ jobs:
     machine: true
     steps:
       - checkout
-      - run: docker run -v $(pwd):/usr/share/nginx/html:ro -d nginx
+      - run: docker run -p 80:80 -v $(pwd):/usr/share/nginx/html:ro -d nginx
       - run: curl 127.0.0.1 | grep "Do it" || exit 1
       - run: 
           command: mkdir artifacts && mv index.html artifacts/
