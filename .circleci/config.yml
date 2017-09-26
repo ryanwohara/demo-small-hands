@@ -1,0 +1,11 @@
+version: 2
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout
+      - run: docker run -v ~/repo:/usr/share/nginx/html:ro -d nginx
+      - run: curl 127.0.0.1 | grep "Do it" || exit 1
+      - run: mkdir artifacts && mv index.html artifacts/
+      - store_artifacts:
+          path: artifacts
